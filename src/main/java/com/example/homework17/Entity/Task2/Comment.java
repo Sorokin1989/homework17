@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "comments")
 public class Comment {
 
     @Id
@@ -29,9 +30,6 @@ public class Comment {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getText() {
         return text;

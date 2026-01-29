@@ -66,18 +66,24 @@ public class User {
     private LocalDateTime registeredAt;
 
     @OneToOne
-    @JoinColumn(name = "profile_id",unique = true)
+    @JoinColumn(name = "profile_id", unique = true)
     private Profile profile;
 
     @OneToMany(mappedBy = "user")
 
-    private List<Post> posts=new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Comment>commentList=new ArrayList<>();
+    private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Like>likes=new ArrayList<>();
+    private List<Like> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "requester")
+    private List<Friendship> sent = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Friendship> received = new ArrayList<>();
 
     public User() {
     }
@@ -141,4 +147,11 @@ public class User {
         return likes;
     }
 
+    public List<Friendship> getSent() {
+        return sent;
+    }
+
+    public List<Friendship> getReceived() {
+        return received;
+    }
 }
