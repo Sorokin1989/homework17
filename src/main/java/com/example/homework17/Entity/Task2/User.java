@@ -47,14 +47,14 @@ package com.example.homework17.Entity.Task2;
 //Пост может иметь много лайков от разных пользователей
 //Пользователь может лайкнуть много постов
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -64,4 +64,81 @@ public class User {
     private String email;
     private String passwordHash;
     private LocalDateTime registeredAt;
+
+    @OneToOne
+    @JoinColumn(name = "profile_id",unique = true)
+    private Profile profile;
+
+    @OneToMany(mappedBy = "user")
+
+    private List<Post> posts=new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment>commentList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Like>likes=new ArrayList<>();
+
+    public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public LocalDateTime getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public void setRegisteredAt(LocalDateTime registeredAt) {
+        this.registeredAt = registeredAt;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
 }
