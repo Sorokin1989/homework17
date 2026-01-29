@@ -48,10 +48,72 @@ package com.example.homework17.Entity.Task1;
 //Определите владеющую и обратную сторону для каждой связи
 //Укажите, где нужны unique = true для OneToOne связей
 
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-
-
-
+@Entity
+@Table(name = "students")
 public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private LocalDate enrollmentDate;
+
+
+
+    @OneToMany(mappedBy = "student")
+
+    private List<Enrollment> enrollments=new ArrayList<>();
+
+    public Student() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getEnrollmentDate() {
+        return enrollmentDate;
+    }
+
+    public void setEnrollmentDate(LocalDate enrollmentDate) {
+        this.enrollmentDate = enrollmentDate;
+    }
+
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
 }
