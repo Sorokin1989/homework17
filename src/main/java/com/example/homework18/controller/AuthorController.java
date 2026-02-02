@@ -117,6 +117,29 @@ public class AuthorController {
 
     // Напиши метод здесь:
 
+    @GetMapping("/email")
+    public ResponseEntity<Optional<Author>> findAuthorByEmail(@RequestParam String email) {
+//        Optional<Author>author=authorRepository.getAuthorByEmailEqualsIgnoreCase(email); // 1 способ
+//        if (author.isPresent()){
+//            return new ResponseEntity<>(author,HttpStatus.OK);
+//        }
+//        else return new ResponseEntity<>(Optional.empty(),HttpStatus.NOT_FOUND);
+
+
+        Optional<Author> author = authorRepository.getAuthorByEmailEqualsIgnoreCase2(email);
+        if (author.isPresent()) {
+            return new ResponseEntity<>(author, HttpStatus.OK);
+        } else return new ResponseEntity<>(Optional.empty(), HttpStatus.NOT_FOUND);// 2 способ
+
+
+//        Optional<AuthorDto>authorDto=authorRepository.getAuthorByEmailEqualsIgnoreCase3(email);
+//        if (authorDto.isPresent()){
+//            return new ResponseEntity<>(authorDto,HttpStatus.OK);
+//        }
+//        else
+//            return new ResponseEntity<>(Optional.empty(),HttpStatus.NOT_FOUND);// 3 способ
+    }
+
 
     // ========================================
     // ЗАДАНИЕ 5: Найти авторов, у которых email заканчивается на домен
