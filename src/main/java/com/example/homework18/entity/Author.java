@@ -1,18 +1,16 @@
 package com.example.homework18.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "authors")
 public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String surnaame;
+    private String surname;
     private String email;
     private Integer age;
 
@@ -31,12 +29,12 @@ public class Author {
         this.name = name;
     }
 
-    public String getSurnaame() {
-        return surnaame;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurnaame(String surnaame) {
-        this.surnaame = surnaame;
+    public void setSurname(String surnaame) {
+        this.surname = surnaame;
     }
 
     public String getEmail() {

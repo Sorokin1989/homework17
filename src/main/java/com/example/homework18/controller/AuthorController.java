@@ -1,6 +1,23 @@
 package com.example.homework18.controller;
 
+import com.example.homework18.entity.Author;
+import com.example.homework18.repository.AuthorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/author")
 public class AuthorController {
+
+    @Autowired
+    AuthorRepository authorRepository;
 
     // ========================================
     // ЗАДАНИЕ 1: Найти автора по ID
@@ -11,6 +28,27 @@ public class AuthorController {
     // Пример использования: findByIdCustom(5L) → найдет автора с id=5
 
     // Напиши метод здесь:
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Author>>findAuthorById(@PathVariable Long id){
+
+//        Optional<Author>author=authorRepository.getAuthorById(id);  //1 способ
+//        if (author.isPresent())
+//      return  new ResponseEntity<>(author,HttpStatus.OK);
+//        else
+//            return new ResponseEntity<>(Optional.empty(),HttpStatus.NOT_FOUND);
+//
+        Optional<Author>author=authorRepository.getAuthorById2(id);  //2 способ
+        if (author.isPresent())
+      return  new ResponseEntity<>(author,HttpStatus.OK);
+        else
+            return new ResponseEntity<>(Optional.empty(),HttpStatus.NOT_FOUND);
+
+
+
+    }
+
+
 
 
     // ========================================
