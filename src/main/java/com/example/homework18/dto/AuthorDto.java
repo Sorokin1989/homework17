@@ -5,11 +5,13 @@ public class AuthorDto {
     private Long id;
     private String name;
     private String surname;
+    private boolean active;
 
     public AuthorDto(Long id, String name, String surname) {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.active=active;
     }
 
     public Long getId() {
@@ -30,5 +32,13 @@ public class AuthorDto {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

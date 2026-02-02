@@ -13,6 +13,7 @@ public class Author {
     private String surname;
     private String email;
     private Integer age;
+    private boolean active;
 
     public Author() {
     }
@@ -51,5 +52,13 @@ public class Author {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

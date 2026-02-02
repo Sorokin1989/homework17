@@ -1,15 +1,14 @@
 package com.example.homework18.controller;
 
+import com.example.homework18.dto.AuthorDto;
 import com.example.homework18.entity.Author;
 import com.example.homework18.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,7 +29,7 @@ public class AuthorController {
     // Напиши метод здесь:
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Author>>findAuthorById(@PathVariable Long id){
+    public ResponseEntity<Optional<AuthorDto>>findAuthorById(@PathVariable Long id){
 
 //        Optional<Author>author=authorRepository.getAuthorById(id);  //1 способ
 //        if (author.isPresent())
@@ -38,18 +37,19 @@ public class AuthorController {
 //        else
 //            return new ResponseEntity<>(Optional.empty(),HttpStatus.NOT_FOUND);
 //
-        Optional<Author>author=authorRepository.getAuthorById2(id);  //2 способ
-        if (author.isPresent())
-      return  new ResponseEntity<>(author,HttpStatus.OK);
+//        Optional<Author>author=authorRepository.getAuthorById2(id);  //2 способ
+//        if (author.isPresent())
+//      return  new ResponseEntity<>(author,HttpStatus.OK);
+//        else
+//            return new ResponseEntity<>(Optional.empty(),HttpStatus.NOT_FOUND);
+
+        Optional<AuthorDto>authorDto=authorRepository.getAuthorById3(id);
+        if(authorDto.isPresent()){
+            return new ResponseEntity<>(authorDto,HttpStatus.OK);
+        }
         else
             return new ResponseEntity<>(Optional.empty(),HttpStatus.NOT_FOUND);
-
-
-
     }
-
-
-
 
     // ========================================
     // ЗАДАНИЕ 2: Найти всех активных авторов
@@ -60,6 +60,14 @@ public class AuthorController {
     // Пример: findByActiveTrue() → найдет всех активных
 
     // Напиши метод здесь:
+
+    @GetMapping("/active")
+   public ResponseEntity<List<Author>>findAuhtorActive(){
+       List<Author>authors= authorRepository.getAuthorByActive(true);
+
+           return new ResponseEntity<>(authors,HttpStatus.OK);
+
+   }
 
 
     // ========================================
