@@ -11,7 +11,14 @@ public class AuthorDto {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.active=active;
+
+    }
+
+    public AuthorDto(Long id, String name, String surname, boolean active) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.active = active;
     }
 
     public Long getId() {

@@ -14,10 +14,20 @@ import java.util.Optional;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
     Optional<Author> getAuthorById(Long id); //1 способ
     //    @Query(value = "select a from Author a where a.id=:id")
-//    @Query(value = "select * from authors where id=:id", nativeQuery = true)//2 способ
-//    Optional<Author> getAuthorById2(Long id);
+    @Query(value = "select * from authors where id=:id", nativeQuery = true)//2 способ
+    Optional<Author> getAuthorById2(Long id);
     @Query(value = "select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname)from Author a where a.id=:id")
     Optional<AuthorDto> getAuthorById3(Long id); //3 способ
 
+
+
     List<Author> getAuthorByActive(boolean active);//1 способ
+
+    @Query(value = "SELECT * FROM authors WHERE active = 1",nativeQuery = true)//2 способ
+    List<Author> getAuthorByActive2();
+
+    List<Author> getAuthorByAgeAfter(Integer age);
+
+//    @Query(value = "select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname,a.active) from Author a where a.active=true")
+//    List<AuthorDto>getAuthorByActive3();//3 способ
 }
