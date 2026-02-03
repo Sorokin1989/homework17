@@ -58,7 +58,8 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     List<Author> getAuthorByEmailEndingWith(String email);// 1 способ
 
 
-    @Query(value = "SELECT * FROM authors WHERE email LIKE '%' + ?1", nativeQuery = true) // 2 способ
+    @Query(value = "SELECT * FROM authors WHERE email LIKE '%' + ?1", nativeQuery = true)
+        // 2 способ
     List<Author> getAuthorByEmailEndingWith2(String email);
 
 //    @Query("select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname,a.active) from Author a where a.email LIKE '%' + ?1")
@@ -68,7 +69,8 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     Long countAuthorByAge(Integer age); // 1 способ
 
-    @Query(value = "SELECT COUNT(*) FROM authors WHERE age = :age",nativeQuery = true)// 2 способ
+    @Query(value = "SELECT COUNT(*) FROM authors WHERE age = :age", nativeQuery = true)
+// 2 способ
     Long countAuthorByAge2(Integer age);
 
 
@@ -78,7 +80,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
 
     @Query(value = "SELECT CAST(CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS BIT) " +
-            "FROM authors WHERE email = ?1",nativeQuery = true)
+            "FROM authors WHERE email = ?1", nativeQuery = true)
     boolean existsByEmail2(String email); // 2 способ
 
 
@@ -86,20 +88,30 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     List<Author> findTop5ByOrderByAgeAsc(); // 1 способ
 
-    @Query(value = "SELECT TOP 5 * FROM authors ORDER BY age ASC",nativeQuery = true)
-    List<Author>findTop5ByOrderByAgeAsc2();  // 2 способ
+    @Query(value = "SELECT TOP 5 * FROM authors ORDER BY age ASC", nativeQuery = true)
+    List<Author> findTop5ByOrderByAgeAsc2();  // 2 способ
 
     // 9.------------------------------------------------------------------------------------
 
-    List<Author> findByNameOrSurname(String name,String surname); // 1 способ
+    List<Author> findByNameOrSurname(String name, String surname); // 1 способ
 
-//    @Query(value = "SELECT * FROM authors WHERE name = ? OR surname = ?",nativeQuery = true)
-//    List<Author> findByNameOrSurname2(String name,String surname); // 2 способ
-
-    @Query("select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname,a.active) from Author a where a.name=:name OR a.surname=:surname")
-    List<AuthorDto> findByNameOrSurname3(@Param("name") String name,@Param("surname") String surname);
+    @Query(value = "SELECT * FROM authors WHERE name = ? OR surname = ?", nativeQuery = true)
+    List<Author> findByNameOrSurname2(String name, String surname); // 2 способ
 
 
+//    @Query("select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname,a.active) from Author a where a.name=:name OR a.surname=:surname")
+//    List<AuthorDto> findByNameOrSurname3(@Param("name") String name,@Param("surname") String surname);
+
+
+    // 10.---------------------------------------------------------------------------------------
+
+//    List<Author> findByNameContainingIgnoreCase(String namePart); // 1 способ
+
+    @Query(value = "SELECT * FROM authors WHERE LOWER(name) LIKE LOWER('%' + ?1 + '%')", nativeQuery = true)
+    List<Author> findByNameContainingIgnoreCase2(String namePart); // 2 способ
+
+//    @Query("select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname,a.active) from Author a WHERE LOWER(a.name) LIKE LOWER(CONCAT('%', :namePart, '%'))")
+//    List<AuthorDto> findByNameContainingIgnoreCase3(String namePart); // 3 способ
 
 
 }

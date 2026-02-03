@@ -229,13 +229,13 @@ public class AuthorController {
     @GetMapping("/youngDto")
     public ResponseEntity<List<AuthorDto>> findAuthorDTOYoungByAgeASC() {
 
-       List<AuthorDto> authorDtos= authorRepository.findTop5ByOrderByAgeAsc2().stream().map(a -> new AuthorDto(
+        List<AuthorDto> authorDtos = authorRepository.findTop5ByOrderByAgeAsc2().stream().map(a -> new AuthorDto(
                 a.getId(),
                 a.getName(),
                 a.getSurname(),
                 a.getActive())).toList();
 
-       return new ResponseEntity<>(authorDtos,HttpStatus.OK);
+        return new ResponseEntity<>(authorDtos, HttpStatus.OK);
 
     }
 
@@ -250,20 +250,17 @@ public class AuthorController {
 
     // Напиши метод здесь:
     @GetMapping("/nameOrSurname")
-    public ResponseEntity<List<AuthorDto>> findAuthorNameOrSurname(
-            @RequestParam (required = false)String name,
-            @RequestParam (required = false) String surname){
+    public ResponseEntity<List<Author>> findAuthorNameOrSurname(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String surname) {
 //        List<Author>authors=authorRepository.findByNameOrSurname(name,surname); // 1 способ
 //        return new ResponseEntity<>(authors,HttpStatus.OK);
 
-//        List<Author>authors=authorRepository.findByNameOrSurname2(name,surname); // 2 способ
-//        return new ResponseEntity<>(authors,HttpStatus.OK);
+        List<Author> authors = authorRepository.findByNameOrSurname2(name, surname); // 2 способ
+        return new ResponseEntity<>(authors, HttpStatus.OK);
 
-
-        List<AuthorDto>authorDtos=authorRepository.findByNameOrSurname3(name,surname);
-        return new ResponseEntity<>(authorDtos,HttpStatus.OK);
-
-
+//        List<AuthorDto>authorDtos=authorRepository.findByNameOrSurname3(name,surname);
+//        return new ResponseEntity<>(authorDtos,HttpStatus.OK);
 
 
     }
@@ -279,4 +276,21 @@ public class AuthorController {
     // Пример: findByNameContainingIgnoreCase("john") → найдет "John", "JOHNSON", "johnny"
 
     // Напиши метод здесь:
+
+    @GetMapping("/text/{namePart}")
+    public ResponseEntity<List<Author>> findByNameText(@PathVariable String namePart) {
+
+//        List<Author>authors=authorRepository.findByNameContainingIgnoreCase(namePart);
+//
+//        return new ResponseEntity<>(authors,HttpStatus.OK);// 1 способ
+
+        List<Author> authors = authorRepository.findByNameContainingIgnoreCase2(namePart);
+
+        return new ResponseEntity<>(authors, HttpStatus.OK); // 2 способ
+
+//        List<AuthorDto>authorDtos=authorRepository.findByNameContainingIgnoreCase3(namePart);
+//        return new ResponseEntity<>(authorDtos,HttpStatus.OK); // 3 способ
+
+    }
+
 }
