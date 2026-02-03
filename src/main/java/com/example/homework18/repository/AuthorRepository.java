@@ -89,8 +89,15 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(value = "SELECT TOP 5 * FROM authors ORDER BY age ASC",nativeQuery = true)
     List<Author>findTop5ByOrderByAgeAsc2();  // 2 способ
 
+    // 9.------------------------------------------------------------------------------------
 
+    List<Author> findByNameOrSurname(String name,String surname); // 1 способ
 
+//    @Query(value = "SELECT * FROM authors WHERE name = ? OR surname = ?",nativeQuery = true)
+//    List<Author> findByNameOrSurname2(String name,String surname); // 2 способ
+
+    @Query("select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname,a.active) from Author a where a.name=:name OR a.surname=:surname")
+    List<AuthorDto> findByNameOrSurname3(@Param("name") String name,@Param("surname") String surname);
 
 
 

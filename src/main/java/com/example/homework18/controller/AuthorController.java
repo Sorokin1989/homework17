@@ -249,6 +249,24 @@ public class AuthorController {
     // Пример: findByNameOrSurname("John", "Smith") → найдет John X или Y Smith
 
     // Напиши метод здесь:
+    @GetMapping("/nameOrSurname")
+    public ResponseEntity<List<AuthorDto>> findAuthorNameOrSurname(
+            @RequestParam (required = false)String name,
+            @RequestParam (required = false) String surname){
+//        List<Author>authors=authorRepository.findByNameOrSurname(name,surname); // 1 способ
+//        return new ResponseEntity<>(authors,HttpStatus.OK);
+
+//        List<Author>authors=authorRepository.findByNameOrSurname2(name,surname); // 2 способ
+//        return new ResponseEntity<>(authors,HttpStatus.OK);
+
+
+        List<AuthorDto>authorDtos=authorRepository.findByNameOrSurname3(name,surname);
+        return new ResponseEntity<>(authorDtos,HttpStatus.OK);
+
+
+
+
+    }
 
 
     // ========================================
