@@ -197,8 +197,12 @@ public class AuthorController {
 
     // Напиши метод здесь:
 
-    public boolean findAuthorByEmail(@RequestParam String email){
+    @GetMapping("/okEmail")
+    public boolean findAuthorByEmailOk(@RequestParam String email){
 
+//        return authorRepository.existsByEmail(email); // 1 способ
+
+        return authorRepository.existsByEmail2(email); // 2 способ
     }
 
     // ========================================

@@ -72,6 +72,17 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     Long countAuthorByAge2(Integer age);
 
 
+    // 7.-----------------------------------------------------------------------------------
+
+//    boolean existsByEmail(String email);// 1 способ
+
+
+    @Query(value = "SELECT CAST(CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS BIT) " +
+            "FROM authors WHERE email = ?1",nativeQuery = true)
+    boolean existsByEmail2(String email); // 2 способ
+
+    // 8.------------------------------------------------------------------------------------
+
 
 
 
