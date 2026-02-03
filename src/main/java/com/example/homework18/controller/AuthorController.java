@@ -178,12 +178,12 @@ public class AuthorController {
     // Напиши метод здесь:
 
     @GetMapping("/count/{age}")
-    public ResponseEntity<Long> findCountByAge(@PathVariable Integer age){
+    public ResponseEntity<Long> findCountByAge(@PathVariable Integer age) {
 //        Long count=authorRepository.countAuthorByAge(age);
 //        return new ResponseEntity<>(count,HttpStatus.OK); // 1 способ
 
-        Long count=authorRepository.countAuthorByAge2(age);
-        return new ResponseEntity<>(count,HttpStatus.OK); // 2 способ
+        Long count = authorRepository.countAuthorByAge2(age);
+        return new ResponseEntity<>(count, HttpStatus.OK); // 2 способ
     }
 
     // ========================================
@@ -198,7 +198,7 @@ public class AuthorController {
     // Напиши метод здесь:
 
     @GetMapping("/okEmail")
-    public boolean findAuthorByEmailOk(@RequestParam String email){
+    public boolean findAuthorByEmailOk(@RequestParam String email) {
 
 //        return authorRepository.existsByEmail(email); // 1 способ
 
@@ -216,6 +216,28 @@ public class AuthorController {
 
     // Напиши метод здесь:
 
+    @GetMapping("/young")
+    public ResponseEntity<List<Author>> findAuthorYoungByAgeASC() {
+//        List<Author>authors=authorRepository.findTop5ByOrderByAgeAsc(); // 1 способ
+//        return new ResponseEntity<>(authors,HttpStatus.OK);
+
+        List<Author> authors = authorRepository.findTop5ByOrderByAgeAsc2();
+        return new ResponseEntity<>(authors, HttpStatus.OK); // 2 способ
+
+    }
+
+    @GetMapping("/youngDto")
+    public ResponseEntity<List<AuthorDto>> findAuthorDTOYoungByAgeASC() {
+
+       List<AuthorDto> authorDtos= authorRepository.findTop5ByOrderByAgeAsc2().stream().map(a -> new AuthorDto(
+                a.getId(),
+                a.getName(),
+                a.getSurname(),
+                a.getActive())).toList();
+
+       return new ResponseEntity<>(authorDtos,HttpStatus.OK);
+
+    }
 
     // ========================================
     // ЗАДАНИЕ 9: Найти авторов по имени ИЛИ фамилии

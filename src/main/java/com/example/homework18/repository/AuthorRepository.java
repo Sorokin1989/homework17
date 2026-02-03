@@ -81,7 +81,14 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             "FROM authors WHERE email = ?1",nativeQuery = true)
     boolean existsByEmail2(String email); // 2 способ
 
+
     // 8.------------------------------------------------------------------------------------
+
+    List<Author> findTop5ByOrderByAgeAsc(); // 1 способ
+
+    @Query(value = "SELECT TOP 5 * FROM authors ORDER BY age ASC",nativeQuery = true)
+    List<Author>findTop5ByOrderByAgeAsc2();  // 2 способ
+
 
 
 
