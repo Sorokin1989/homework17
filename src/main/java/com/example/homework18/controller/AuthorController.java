@@ -1,5 +1,6 @@
 package com.example.homework18.controller;
 
+import com.example.homework18.dto.AuthorDto;
 import com.example.homework18.entity.Author;
 import com.example.homework18.repository.AuthorRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -151,6 +152,18 @@ public class AuthorController {
     // Пример: findByEmailEndingWith("@gmail.com") → все с gmail
 
     // Напиши метод здесь:
+    @GetMapping("/domain")
+    public ResponseEntity<List<Author>>findByEmailDomain(@RequestParam String domain){
+//        List<Author>authors=authorRepository.getAuthorByEmailEndingWith(domain);
+//        return new ResponseEntity<>(authors,HttpStatus.OK); // 1 способ
+
+        List<Author> authors=authorRepository.getAuthorByEmailEndingWith2(domain); //2 способ
+        return new ResponseEntity<>(authors,HttpStatus.OK);
+
+//        List<AuthorDto> authorDtos=authorRepository.getAuthorByEmailEndingWith3(domain);
+//        return new ResponseEntity<>(authorDtos,HttpStatus.OK);
+
+    }
 
 
     // ========================================

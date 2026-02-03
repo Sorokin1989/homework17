@@ -49,7 +49,20 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(value = "SELECT * FROM authors WHERE LOWER(email) = LOWER(:email)",nativeQuery = true) // 2 способ
     Optional<Author> getAuthorByEmailEqualsIgnoreCase2(String email);
 
+
+
 //    @Query("select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname) from Author a where lower(a.email)=lower(:email)")
 //    Optional<AuthorDto> getAuthorByEmailEqualsIgnoreCase3(@Param("email") String email); //3 способ
+
+    // 5.---------------------------------------------------------------------------
+    List<Author> getAuthorByEmailEndingWith(String email);// 1 способ
+
+
+    @Query(value = "SELECT * FROM authors WHERE email LIKE '%' + ?1",nativeQuery = true)// 2 способ
+    List<Author> getAuthorByEmailEndingWith2(String email);
+
+//    @Query("select new com.example.homework18.dto.AuthorDto(a.id,a.name,a.surname,a.active) from Author a where a.email LIKE '%' + ?1")
+//    List<AuthorDto>getAuthorByEmailEndingWith3(String email);// 3 способ
+
 
 }
