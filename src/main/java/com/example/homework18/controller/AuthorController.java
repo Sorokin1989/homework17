@@ -153,15 +153,15 @@ public class AuthorController {
 
     // Напиши метод здесь:
     @GetMapping("/domain")
-    public ResponseEntity<List<Author>>findByEmailDomain(@RequestParam String domain){
+    public ResponseEntity<List<Author>> findByEmailDomain(@RequestParam String domain) {
 //        List<Author>authors=authorRepository.getAuthorByEmailEndingWith(domain);
 //        return new ResponseEntity<>(authors,HttpStatus.OK); // 1 способ
 
-        List<Author> authors=authorRepository.getAuthorByEmailEndingWith2(domain); //2 способ
-        return new ResponseEntity<>(authors,HttpStatus.OK);
+        List<Author> authors = authorRepository.getAuthorByEmailEndingWith2(domain); //2 способ
+        return new ResponseEntity<>(authors, HttpStatus.OK);
 
 //        List<AuthorDto> authorDtos=authorRepository.getAuthorByEmailEndingWith3(domain);
-//        return new ResponseEntity<>(authorDtos,HttpStatus.OK);
+//        return new ResponseEntity<>(authorDtos,HttpStatus.OK); // 3 способ
 
     }
 
@@ -177,6 +177,14 @@ public class AuthorController {
 
     // Напиши метод здесь:
 
+    @GetMapping("/count/{age}")
+    public ResponseEntity<Long> findCountByAge(@PathVariable Integer age){
+//        Long count=authorRepository.countAuthorByAge(age);
+//        return new ResponseEntity<>(count,HttpStatus.OK); // 1 способ
+
+        Long count=authorRepository.countAuthorByAge2(age);
+        return new ResponseEntity<>(count,HttpStatus.OK); // 2 способ
+    }
 
     // ========================================
     // ЗАДАНИЕ 7: Проверить существует ли автор с данным email
@@ -189,6 +197,9 @@ public class AuthorController {
 
     // Напиши метод здесь:
 
+    public boolean findAuthorByEmail(@RequestParam String email){
+
+    }
 
     // ========================================
     // ЗАДАНИЕ 8: Найти топ-5 самых молодых авторов
